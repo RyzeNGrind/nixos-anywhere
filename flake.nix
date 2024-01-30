@@ -5,10 +5,10 @@
   inputs.nixos-anywhere.url = "github:nix-community/nixos-anywhere";
   inputs.nixos-anywhere.inputs.nixpkgs.follows = "nixpkgs";
 
-  outputs = { nixpkgs, disko, ... }:
+  outputs = { self, nixpkgs, disko, ... }:
     {
-      nixosConfigurations.jetson-xavier-agx = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
+      nixosConfigurations.jetsonagx = nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
         modules = [
           disko.nixosModules.disko
           ./configuration.nix
@@ -32,3 +32,4 @@
       }; */
     };
 }
+

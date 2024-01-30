@@ -36,7 +36,7 @@
         };
       };
     };
-    nvme = {
+    disk = {
       nvme0n1 = {
         device = "/dev/disk/by-id/nvme-KINGSTON_SNVS2000G_50026B76855F4501";
         type = "disk";
