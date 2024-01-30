@@ -5,7 +5,7 @@
     ./disk-config.nix
     (builtins.fetchTarball {
       url = "https://github.com/anduril/jetpack-nixos/archive/master.tar.gz";
-      sha256 = "d9d1398b35dbe206b615d646a98b43f5b79c0c87";
+      sha256 = "66d03d01065b44d3f1431f0d118e6b921d6347ad64d099288174fef3e74867ca";
     } + "/modules/default.nix")
   ];
 
