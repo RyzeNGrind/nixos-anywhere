@@ -3,7 +3,10 @@
     (modulesPath + "/installer/scan/not-detected.nix")
     (modulesPath + "/profiles/qemu-guest.nix")
     ./disk-config.nix
-    (builtins.fetchTarball "https://github.com/anduril/jetpack-nixos/archive/master.tar.gz" + "/modules/default.nix")
+    (builtins.fetchTarball {
+      url = "https://github.com/anduril/jetpack-nixos/archive/master.tar.gz";
+      sha256 = "d9d1398b35dbe206b615d646a98b43f5b79c0c87";
+    } + "/modules/default.nix")
   ];
 
   hardware.nvidia-jetpack.enable = true;
