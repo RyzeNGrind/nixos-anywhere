@@ -1,52 +1,55 @@
-# Example to create a bios compatible gpt partition
 { lib, ... }:
+
 {
   disko.devices = {
-    disk.disk1 = {
-      device = lib.mkDefault "/dev/sda";
-      type = "disk";
-      content = {
-        type = "gpt";
-        partitions = {
-          boot = {
-            name = "boot";
-            size = "1M";
-            type = "EF02";
-          };
-          esp = {
-            name = "ESP";
-            size = "500M";
-            type = "EF00";
-            content = {
-              type = "filesystem";
-              format = "vfat";
-              mountpoint = "/boot";
+    disk = {
+      disk0 = {
+        device = "/dev/disk/by-id/usb-Kingston_DataTraveler_70_D067E5164F91F5906604014B";
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            ESP = {
+              type = "EF00";
+              size = "500M";
+              content = {
+                type = "filesystem";
+                format = "vfat";
+                mountpoint = "/boot";
+              };
             };
-          };
-          root = {
-            name = "root";
-            size = "100%";
-            content = {
-              type = "lvm_pv";
-              vg = "pool";
+            sda = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/mnt/sda";
+              };
+            };
+            swap = {
+              size = "30G";
+              content = {
+                type = "swap";
+              };
             };
           };
         };
       };
     };
-    lvm_vg = {
-      pool = {
-        type = "lvm_vg";
-        lvs = {
-          root = {
-            size = "100%FREE";
-            content = {
-              type = "filesystem";
-              format = "ext4";
-              mountpoint = "/";
-              mountOptions = [
-                "defaults"
-              ];
+    nvme = {
+      nvme0n1 = {
+        device = "/dev/disk/by-id/nvme-KINGSTON_SNVS2000G_50026B76855F4501";
+        type = "disk";
+        content = {
+          type = "gpt";
+          partitions = {
+            root = {
+              size = "100%";
+              content = {
+                type = "filesystem";
+                format = "ext4";
+                mountpoint = "/";
+              };
             };
           };
         };
