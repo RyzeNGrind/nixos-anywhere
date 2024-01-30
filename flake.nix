@@ -2,6 +2,8 @@
   inputs.nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
   inputs.disko.url = "github:nix-community/disko";
   inputs.disko.inputs.nixpkgs.follows = "nixpkgs";
+  inputs.nixos-anywhere.url = "github:nix-community/nixos-anywhere";
+  inputs.nixos-anywhere.inputs.nixpkgs.follows = "nixpkgs";
 
   outputs = { nixpkgs, disko, ... }:
     {
